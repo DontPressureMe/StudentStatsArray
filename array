@@ -1,0 +1,152 @@
+public class StudentStatsArray {
+    private final Student[] students;
+    // Add private final variable to hold Students array
+
+
+    public StudentStatsArray(Student[] students)
+    {
+        this.students = students;
+    }
+
+
+    // Returns the average gpa of the students
+    public double averageGpa()
+    {
+        double gpa = 0;
+        for (Student gp : this.students)
+        {
+
+
+            gpa += gp.getGpa();
+        }
+        return gpa / students.length;
+    }
+
+
+    // Returns the gpa range of the students
+    public double getGpaRange()
+    {
+        double smallGPA = students[0].getGpa();
+        double bigGPA = students[0].getGpa();
+        double GPA;
+        for (int i = 0; i < students.length; i++)
+        {
+            GPA = students[i].getGpa();
+            if (GPA > bigGPA)
+            {
+                bigGPA = GPA;
+            } else if (GPA < smallGPA)
+            {
+                smallGPA = GPA;
+            }
+        }
+        return bigGPA - smallGPA;
+    }
+
+
+    // Returns the name of the student that has the longest length
+    public String getLongestName()
+    {
+        String nameshort = "";
+
+
+        for (Student longName : this.students)
+        {
+            if (longName.getName().length() > nameshort.length())
+            {
+                nameshort = longName.getName();
+
+
+            }
+        }
+        return nameshort;
+    }
+
+
+    // Returns a count of the number freshman students
+    public int getNumFreshman()
+    {
+        int count = 0;
+        for (Student freshman : this.students)
+            if (freshman.getYear() == 1) {
+                count++;
+            }
+        return count;
+    }
+
+
+    // Returns the index of the first student with a name equal to name.
+    // Returns -1 if not found
+    public int search(String name)
+    {
+        for (int i = 0; i < this.students.length; i++)
+            if (students[i].getName().equals(name)) {
+                return i;
+            }
+        return -1;
+    }
+
+
+    // Returns the index of the first student with a gpa greater than or equal to the gpa
+    // Returns -1 if not found
+    public int search(double gpa)
+    {
+        for (int i = 0; i < this.students.length; i++) {
+            if (students[i].getGpa() >= gpa) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+    // Returns 1 if the students are sorted in ascending order by their gpa; -1 if they
+    // are sorted in descending order; 0 otherwise.
+    public int sortStatus()
+    {
+        int order = 0;
+        double gpaAscDesc = students[0].getGpa();
+        for (Student sort : students) {
+            if (sort.getGpa() >= gpaAscDesc) {
+                order = 1;
+            } else if (sort.getGpa() <= gpaAscDesc) {
+                order = -1;
+
+            }
+
+
+        }
+
+        return order;
+    }
+
+
+    // Returns the array of students in JSON like format
+    public String toString()
+    {
+        String JSON = "[\n";
+        for (Student format : students)
+        {
+            JSON += "{\n";
+            JSON += "\tname: " + format.getName() + ",\n";
+            JSON += "\tgpa: " + format.getGpa() + ",\n";
+            JSON += "\tyear: " + format.getYear() + "\n";
+            JSON += "},\n";
+        }
+        JSON += "]";
+        return JSON;
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
